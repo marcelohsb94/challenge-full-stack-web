@@ -1,0 +1,26 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "\"API Rest com Node.js e Express. Utilizando MySQL como banco de dados\"",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcelohsb94/challenge-full-stack-web.git"
+  },
+  "keywords": [
+    "\"API",
+    "Rest",
+    "Node",
+    "Express",
+    "MySQL\""
+  ],
+  "author": "Marcelo Barbosa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcelohsb94/challenge-full-stack-web/issues"
+  },
+  "homepage": "https://github.com/marcelohsb94/challenge-full-stack-web#readme"
+}

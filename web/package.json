@@ -1,0 +1,24 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "\"Framework UI com Vuetify.js baseada em Vue.js e comunica-se com a API através do Axios\"",
+  "main": "main.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcelohsb94/challenge-full-stack-web.git"
+  },
+  "keywords": [
+    "Vue",
+    "Axios",
+    "Vuetify"
+  ],
+  "author": "Marcelo Barbosa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcelohsb94/challenge-full-stack-web/issues"
+  },
+  "homepage": "https://github.com/marcelohsb94/challenge-full-stack-web#readme"
+}
