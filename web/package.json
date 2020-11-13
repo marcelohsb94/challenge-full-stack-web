@@ -20,5 +20,10 @@
   "bugs": {
     "url": "https://github.com/marcelohsb94/challenge-full-stack-web/issues"
   },
-  "homepage": "https://github.com/marcelohsb94/challenge-full-stack-web#readme"
+  "homepage": "https://github.com/marcelohsb94/challenge-full-stack-web#readme",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "vue": "^2.6.12",
+    "vuetify": "^2.3.17"
+  }
 }
