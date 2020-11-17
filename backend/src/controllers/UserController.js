@@ -7,7 +7,7 @@ module.exports = {
 	async signIn(request, response) {
 		const { email, password } = request.body;
 
-		await User.findOne({ email })
+		await User.findOne({ where: { email }})
 			.then(function(user) {
 				if (user) {
 					if (bcrypt.compare(password, user.password)) {
@@ -27,16 +27,17 @@ module.exports = {
 					return response.json({ error: 'Usuário não encontrado' })
 				}
 			})
-			.catch(function(err) {
-				return response.json({ error: err.message });
-			})
+			.catch(function(error) {
+				return response.json({ error: error.message });
+			});
 	},
 
-	async get(request, response) {
+	async getAll(request, response) {
 		const { search } = request.query;
 
 		if (search) {
 			await User.findAll({
+				attributes: ['name', 'email'],
 				where: {
 					[Op.or]: [
 						{
@@ -56,41 +57,46 @@ module.exports = {
 				return response.json(users)
 			})
 			.catch(function(error) {
-				return response.json(error);
+				return response.json({ error: error.message });
 			});
 		} else {
-			await User.findAll()
+			await User.findAll({
+				attributes: ['name', 'email']
+			})
 			.then(function(users) {
 				return response.json(users);
 			})
 			.catch(function(error) {
-				return response.json(error);
+				return response.json({ error: error.message });
 			});
 		}
 	},
 
 	async getOne(request, response) {
 		const { id } = request.params
-		await User.findAll({
+		await User.findOne({
+			attributes: ['name', 'email'],
 			where: { id }
 		})
 		.then(function(user) {
 			return response.json(user)
 		})
 		.catch(function(error){
-			return response.json(error);
-		})
+			return response.json({ error: error.message });
+		});
 	},
 
 	async create(request, response) {
-		const { name, email, ra, cpf } = request.body;
+		const { name, email, password } = request.body;
 
-		await User.create({ name, email, ra, cpf })
-		.then(function() {
+		await User.create({ name, email, password })
+		.then(function(user) {
+			delete user.dataValues.password;
+
 			return response.json(user);
 		})
 		.catch(function(error) {
-			return response.json(error)
+			return response.json({ error: error.message })
 		});
 	},
 
@@ -105,24 +111,26 @@ module.exports = {
 			}
 		)
 		.then(function(user) {
+			delete user.dataValues.password;
+
 			return response.json(user)
 		})
 		.catch(function(error) {
-			return response.json(error)
+			return response.json({ error: error.message })
 		});
 	},
 
 	async delete(request, response) {
-		const { id } = request.params.id;
+		const { id } = request.params;
 
 		await User.destroy({
-			where: { id: id }
+			where: { id }
 		})
 		.then(function() {
 			return response.json(true);
 		})
 		.catch(function(error) {
-			response.json({ error: error})
+			response.json({ error: error.message })
 		});
 
 
