@@ -6,7 +6,6 @@ const security = require('./config/auth');
 
 routes.post('/signIn', UserController.signIn);
 
-
 routes.get('/alunos', security.authorize, StudentController.getAll);
 routes.get('/alunos/:id', security.authorize, StudentController.getOne);
 routes.post('/alunos', security.authorize, StudentController.create);
