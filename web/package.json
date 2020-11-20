@@ -8,11 +8,15 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "aws-sdk": "^2.796.0",
     "axios": "^0.21.0",
+    "bcrypt": "^5.0.0",
     "core-js": "^3.6.5",
+    "vee-validate": "^3.4.5",
     "vue": "^2.6.11",
     "vue-router": "^3.4.9",
-    "vuetify": "^2.2.11"
+    "vuetify": "^2.2.11",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
