@@ -6,13 +6,13 @@ const security = require('./config/auth');
 
 routes.post('/signIn', UserController.signIn);
 
-routes.get('/alunos', StudentController.getAll);
+routes.get('/alunos', security.authorize, StudentController.getAll);
 routes.get('/alunos/:id', security.authorize, StudentController.getOne);
 routes.post('/alunos', security.authorize, StudentController.create);
 routes.put('/alunos/:id', security.authorize, StudentController.update);
 routes.delete('/alunos/:id', security.authorize, StudentController.delete);
 
-routes.get('/usuarios', UserController.getAll);
+routes.get('/usuarios', security.authorize, UserController.getAll);
 routes.get('/usuarios/:id', security.authorize, UserController.getOne);
 routes.post('/usuarios', security.authorize, UserController.create);
 routes.put('/usuarios/:id', security.authorize, UserController.update);

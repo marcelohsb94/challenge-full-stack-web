@@ -20,7 +20,7 @@ module.exports = {
 							process.env.SECRET,
 							{expiresIn: 28800}
 						);
-						return response.json(token);
+						return response.json({ token });
 					}
 					return response.json({ error: 'Senha inválida' });
 				} else {

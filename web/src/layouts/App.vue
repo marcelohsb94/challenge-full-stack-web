@@ -41,7 +41,7 @@
 							<v-icon>mdi-account</v-icon>
 						</v-list-item-icon>
 					</v-list-item>
-					<v-list-item @click="() => {}">
+					<v-list-item @click="logout">
 						<v-list-item-title>Sair</v-list-item-title>
 						<v-list-item-icon>
 							<v-icon color="red">mdi-logout</v-icon>
@@ -62,10 +62,18 @@
 </template>
 
 <script>
+	import router from '../routes';
+
 	export default {
 		data: () => ({
 			drawer: false,
 			group: null,
 		}),
+		methods: {
+			logout() {
+				localStorage.removeItem('user');
+				router.replace('/');
+			}
+		}
 	}
 </script>

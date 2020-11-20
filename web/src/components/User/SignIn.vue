@@ -30,8 +30,9 @@
 <script>
 	import { required, email } from 'vee-validate/dist/rules';
 	import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate';
-	import { bcrypt } from 'bcrypt';
+	import bcrypt from 'bcryptjs';
 	import axios from 'axios';
+	import router from '../../routes';
 
 	setInteractionMode('eager')
 
@@ -52,24 +53,25 @@
 		},
 		data: () => ({
 			email: '',
-			senha: '',
+			password: '',
 		}),
 
 		methods: {
 			submit () {
 				if (this.password) {
-					bcrypt.hash(this.password, 10, function(err, hash) {
-						axios.post('http://localhost:3001/signin',{
-							email: this.email,
+					const email = this.email;
+					bcrypt.hash(this.password, 10).then(async function(hash) {
+						axios.post('http://localhost:3001/SignIn', {
+							email: email,
 							password: hash
+						}).then(function(response) {
+							localStorage.setItem('user', { token: response.data.token });
+							router.replace('dashboard');
+						}).catch(function(error) {
+							console.log(error);
 						})
-					});
+					})
 				}
-				// Obter dados do formulário
-				// Modificar a senha para bcrypt
-				// Enviar dados com axios para a api
-				// Obter os dados e adicionar no localstorage
-				// Redirecionar para dashboard.
 			},
 		},
 	}
