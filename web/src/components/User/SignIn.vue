@@ -65,7 +65,7 @@
 							email: email,
 							password: hash
 						}).then(function(response) {
-							localStorage.setItem('user', { token: response.data.token });
+							localStorage.setItem('userToken', response.data.token);
 							router.replace('dashboard');
 						}).catch(function(error) {
 							console.log(error);

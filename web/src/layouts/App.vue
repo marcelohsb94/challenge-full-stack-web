@@ -1,31 +1,31 @@
 <template>
-	<v-app>
-		<v-navigation-drawer v-model="drawer" clipped bottom>
-			<v-list nav dense>
-				<v-list-item-group v-model="group" active-class="blue--text text--darken-4">
-					<v-list-item link to="/">
+	<v-app light>
+		<v-navigation-drawer v-model="drawer" app clipped>
+			<v-list>
+				<v-list-item-group active-class="blue--text text--darken-4">
+					<v-list-item link to="/dashboard/" exact>
 						<v-list-item-icon>
-							<v-icon>mdi-dashboard</v-icon>
+							<v-icon>mdi-view-dashboard</v-icon>
 						</v-list-item-icon>
 						<v-list-item-title>Dashboard</v-list-item-title>
 					</v-list-item>
-					<v-list-item link to="/LatestMovies">
+					<v-list-item link to="/dashboard/usuarios">
 						<v-list-item-icon>
-							<v-icon>mdi-users</v-icon>
+							<v-icon>mdi-account-multiple</v-icon>
 						</v-list-item-icon>
 						<v-list-item-title>Usuários</v-list-item-title>
 					</v-list-item>
-					<v-list-item link to="/Alunos">
+					<v-list-item link to="/dashboard/alunos">
 						<v-list-item-icon>
-							<v-icon>mdi-users</v-icon>
+							<v-icon>mdi-school</v-icon>
 						</v-list-item-icon>
 						<v-list-item-title>Alunos</v-list-item-title>
 					</v-list-item>
 				</v-list-item-group>
 			</v-list>
 		</v-navigation-drawer>
-		<v-app-bar app dark elevate-on-scroll color="blue darken-4" clipped-left>
-			<v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+		<v-app-bar color="blue darken-4" dark fixed app clipped-left>
+			<v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 			<v-toolbar-title>Page title</v-toolbar-title>
 			<v-spacer></v-spacer>
 			<v-menu offset-y>
@@ -50,11 +50,11 @@
 				</v-list>
 			</v-menu>
 		</v-app-bar>
-		<v-main>
+		<v-content>
 			<v-container fluid>
 				<router-view></router-view>
 			</v-container>
-		</v-main>
+		</v-content>
 		<v-footer app>
 			footer
 		</v-footer>
@@ -66,8 +66,7 @@
 
 	export default {
 		data: () => ({
-			drawer: false,
-			group: null,
+			drawer: true
 		}),
 		methods: {
 			logout() {
