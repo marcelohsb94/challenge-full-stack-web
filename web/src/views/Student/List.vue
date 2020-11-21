@@ -14,7 +14,7 @@
 					<template v-slot:[`item.actions`]={item}>
 						<v-tooltip top>
 							<template v-slot:activator="{ on, attrs }">
-								<v-btn v-bind="attrs" v-on="on" color="primary" fab small class="mr-2" link :to="{ path: '/dashboard/alunos/editar/' + item.id }">
+								<v-btn v-bind="attrs" v-on="on" color="primary" fab small outlined class="mr-2" link :to="{ path: '/dashboard/alunos/editar/' + item.id }">
 									<v-icon small>mdi-pencil</v-icon>
 								</v-btn>
 							</template>
@@ -22,7 +22,7 @@
 						</v-tooltip>
 						<v-tooltip top>
 							<template v-slot:activator="{ on, attrs }">
-								<v-btn v-bind="attrs" v-on="on" color="error" fab small dark @click="deleteStudent(item.id)">
+								<v-btn v-bind="attrs" v-on="on" color="error" fab small outlined dark @click="deleteStudent(item.id)">
 									<v-icon small>mdi-delete</v-icon>
 								</v-btn>
 							</template>
@@ -34,7 +34,7 @@
 		</v-col>
 		<v-tooltip left>
 			<template v-slot:activator="{ on, attrs }">
-				<v-btn v-bind="attrs" v-on="on" fab absolute bottom right dark color="primary" style="bottom:20px" link to="/dashboard/alunos/novo">
+				<v-btn v-bind="attrs" v-on="on" fab absolute bottom right color="primary" style="bottom:20px" link to="/dashboard/alunos/novo">
 					<v-icon>mdi-plus</v-icon>
 				</v-btn>
 			</template>
