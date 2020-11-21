@@ -41,6 +41,7 @@
 	import { required, email } from 'vee-validate/dist/rules';
 	import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate';
 	import axios from 'axios';
+	import router from '../../routes';
 
 	setInteractionMode('eager')
 
@@ -77,9 +78,8 @@
 						Authorization: 'Bearer ' + localStorage.getItem('userToken')
 					}
 				})
-				.then(response => {
-
-					console.log(response.data);
+				.then(() => {
+					router.replace('/dashboard/alunos/');
 				})
 				.catch(error => {
 					console.log(error);
