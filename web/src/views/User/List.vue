@@ -1,5 +1,5 @@
 <template>
-	<v-row align="center" class="list px-3 mx-auto">
+	<v-row align="center" class="list px-2">
 		<v-col cols="12" md="8" class="float-right">
 			<v-text-field label="Buscar..."></v-text-field>
 		</v-col>

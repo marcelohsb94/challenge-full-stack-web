@@ -50,8 +50,7 @@ module.exports = {
 
 	async getOne(request, response) {
 		const { id } = request.params
-
-		await Student.findByPk({ id })
+		await Student.findByPk(id)
 		.then(function(student) {
 			return response.json(student)
 		})

@@ -1,7 +1,7 @@
 <template>
-	<v-row align="center" class="list px-3">
+	<v-row align="center" class="list px-2">
 		<v-col>
-			<h1>Alunos</h1>
+			<h1 class="d-inline-block">Alunos</h1>
 		</v-col>
 		<v-col cols="12" md="5">
 			<form @submit.prevent="searchStudent">
@@ -40,7 +40,6 @@
 			</template>
 			<span>Novo Aluno</span>
 		</v-tooltip>
-
 	</v-row>
 </template>
 
