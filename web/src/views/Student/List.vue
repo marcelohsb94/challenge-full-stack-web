@@ -44,7 +44,8 @@
 </template>
 
 <script>
-	import axios from 'axios'
+	import axios from 'axios';
+
 	export default {
 		data: () => ({
 			search: '',
@@ -72,17 +73,29 @@
 		},
 		methods: {
 			searchStudent() {
-				axios.get('http://localhost:3001/alunos?search='+this.search, {
+				axios.get('http://localhost:3001/alunos?search=' + this.search, {
 					headers: {
 						Authorization: 'Bearer ' + localStorage.getItem('userToken')
 					}
 				})
 				.then(response => {
 					this.students = response.data
-					console.log(this.students);
 				})
 				.catch(error => {
 					console.log(error)
+				})
+			},
+			deleteStudent(id) {
+				axios.delete('http://localhost:3001/alunos/' + id, {
+					headers: {
+						Authorization: 'Bearer ' + localStorage.getItem('userToken')
+					}
+				})
+				.then(() => {
+					this.searchStudent();
+				})
+				.catch(error => {
+					console.log(error);
 				})
 			}
 		}
