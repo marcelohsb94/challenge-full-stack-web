@@ -11,6 +11,7 @@ import Dashboard from '@/views/Dashboard';
 import ListUsers from '@/views/User/List';
 
 import ListStudents from '@/views/Student/List';
+import CreateStudent from '@/views/Student/Create';
 import UpdateStudent from '@/views/Student/Update';
 
 Vue.use(VueRouter)
@@ -43,6 +44,13 @@ const router = new VueRouter({
 				{
 					path: 'alunos/',
 					component: ListStudents,
+					meta: {
+						requiresAuth: true
+					},
+				},
+				{
+					path: 'alunos/novo',
+					component: CreateStudent,
 					meta: {
 						requiresAuth: true
 					},
