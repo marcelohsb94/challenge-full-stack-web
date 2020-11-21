@@ -4,10 +4,14 @@ import VueRouter from 'vue-router'
 import AppLayout from "./layouts/App.vue";
 import PublicLayout from "./layouts/Public.vue";
 
-import SignInUser from '@/components/User/SignIn';
-import Dashboard from '@/components/Dashboard';
-import ListStudents from '@/components/Student/List';
-import ListUsers from '@/components/User/List';
+import SignInUser from '@/views/User/SignIn';
+
+import Dashboard from '@/views/Dashboard';
+
+import ListUsers from '@/views/User/List';
+
+import ListStudents from '@/views/Student/List';
+import UpdateStudent from '@/views/Student/Update';
 
 Vue.use(VueRouter)
 
@@ -39,6 +43,13 @@ const router = new VueRouter({
 				{
 					path: 'alunos/',
 					component: ListStudents,
+					meta: {
+						requiresAuth: true
+					},
+				},
+				{
+					path: 'alunos/editar/:id',
+					component: UpdateStudent,
 					meta: {
 						requiresAuth: true
 					},
