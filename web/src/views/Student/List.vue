@@ -22,7 +22,7 @@
 						</v-tooltip>
 						<v-tooltip top>
 							<template v-slot:activator="{ on, attrs }">
-								<v-btn v-bind="attrs" v-on="on" color="error" fab small outlined dark @click="deleteStudent(item.id)">
+								<v-btn v-bind="attrs" v-on="on" color="error" fab small outlined dark @click="openDeleteDialog(item.id)">
 									<v-icon small>mdi-delete</v-icon>
 								</v-btn>
 							</template>
@@ -40,6 +40,24 @@
 			</template>
 			<span>Novo Aluno</span>
 		</v-tooltip>
+
+		<v-dialog v-model="dialog" persistent max-width="290">
+			<v-card>
+				<v-card-title class="headline">
+					Excluir este registro?
+				</v-card-title>
+				<v-card-text>A remoção é permanente, portando não há como reverter. Tem certeza?</v-card-text>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn color="grey darken-1" text @click="dialog = false; id = null">
+						Cancelar
+					</v-btn>
+					<v-btn color="green darken-1" text @click="deleteStudent(id); dialog = false; id = null">
+						Sim
+					</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 	</v-row>
 </template>
 
@@ -48,6 +66,7 @@
 
 	export default {
 		data: () => ({
+			id: null,
 			search: '',
 			headers: [
 				{ text: 'RA', value: 'ra', align: 'start' },
@@ -55,7 +74,8 @@
 				{ text: 'CPF', value: 'cpf' },
 				{ text: 'Ações', value: 'actions', align: 'center', sortable: false }
 			],
-			students: []
+			students: [],
+			dialog: false
 		}),
 
 		mounted () {
@@ -84,6 +104,10 @@
 				.catch(error => {
 					console.log(error)
 				})
+			},
+			openDeleteDialog(id) {
+				this.id = id;
+				this.dialog = true;
 			},
 			deleteStudent(id) {
 				axios.delete('http://localhost:3001/alunos/' + id, {
