@@ -9,6 +9,8 @@ import SignInUser from '@/views/User/SignIn';
 import Dashboard from '@/views/Dashboard';
 
 import ListUsers from '@/views/User/List';
+import CreateUser from '@/views/User/Create';
+import UpdateUser from '@/views/User/Update';
 
 import ListStudents from '@/views/Student/List';
 import CreateStudent from '@/views/Student/Create';
@@ -65,6 +67,20 @@ const router = new VueRouter({
 				{
 					path: 'usuarios/',
 					component: ListUsers,
+					meta: {
+						requiresAuth: true
+					},
+				},
+				{
+					path: 'usuarios/novo',
+					component: CreateUser,
+					meta: {
+						requiresAuth: true
+					},
+				},
+				{
+					path: 'usuarios/editar/:id',
+					component: UpdateUser,
 					meta: {
 						requiresAuth: true
 					},
