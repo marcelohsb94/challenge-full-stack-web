@@ -7,7 +7,7 @@ module.exports = {
 
 		if (search) {
 			await Student.findAll({
-				attributes: ['id', 'ra', 'name', 'email'],
+				attributes: ['id', 'ra', 'name', 'cpf'],
 				where: {
 					[Op.or]: [
 						{
@@ -37,7 +37,7 @@ module.exports = {
 		}
 		else {
 			await Student.findAll({
-				attributes: ['id', 'ra', 'name', 'email']
+				attributes: ['id', 'ra', 'name', 'cpf']
 			})
 			.then(function(students) {
 				return response.json(students);

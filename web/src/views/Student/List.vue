@@ -52,7 +52,7 @@
 			headers: [
 				{ text: 'RA', value: 'ra', align: 'start' },
 				{ text: 'Nome', value: 'name', align: 'start' },
-				{ text: 'E-Mail', value: 'email' },
+				{ text: 'CPF', value: 'cpf' },
 				{ text: 'Ações', value: 'actions', align: 'center', sortable: false }
 			],
 			students: []

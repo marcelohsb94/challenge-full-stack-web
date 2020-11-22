@@ -10,19 +10,23 @@ module.exports = {
 		await User.findOne({ where: { email }})
 			.then(function(user) {
 				if (user) {
-					if (bcrypt.compare(password, user.password)) {
-						const token = jwt.sign(
-							{
-								id: user.id,
-								email: user.email,
-								nome: user.nome
-							},
-							process.env.SECRET,
-							{expiresIn: 28800}
-						);
-						return response.json({ token });
-					}
-					return response.json({ error: 'Senha inválida' });
+					bcrypt.compare(password, user.password)
+					.then(function(result) {
+						if (result) {
+							const token = jwt.sign(
+								{
+									id: user.id,
+									email: user.email,
+									nome: user.nome
+								},
+								process.env.SECRET,
+								{expiresIn: 28800}
+							);
+							return response.json({ token });
+						} else {
+							return response.json({ error: 'Senha inválida' });
+						}
+					});
 				} else {
 					return response.json({ error: 'Usuário não encontrado' })
 				}
@@ -37,7 +41,7 @@ module.exports = {
 
 		if (search) {
 			await User.findAll({
-				attributes: ['name', 'email'],
+				attributes: ['id', 'name', 'email'],
 				where: {
 					[Op.or]: [
 						{
@@ -61,7 +65,7 @@ module.exports = {
 			});
 		} else {
 			await User.findAll({
-				attributes: ['name', 'email']
+				attributes: ['id', 'name', 'email']
 			})
 			.then(function(users) {
 				return response.json(users);
@@ -75,7 +79,7 @@ module.exports = {
 	async getOne(request, response) {
 		const { id } = request.params
 		await User.findOne({
-			attributes: ['name', 'email'],
+			attributes: ['id', 'name', 'email'],
 			where: { id }
 		})
 		.then(function(user) {
@@ -101,18 +105,16 @@ module.exports = {
 	},
 
 	async update(request, response) {
-		const { name, password } = request.body;
+		const { name, email, password } = request.body;
 		const { id } = request.params;
 
 		await User.update(
-			{ name, password },
+			{ name, email, password },
 			{
 				where: { id }
 			}
 		)
 		.then(function(user) {
-			delete user.dataValues.password;
-
 			return response.json(user)
 		})
 		.catch(function(error) {

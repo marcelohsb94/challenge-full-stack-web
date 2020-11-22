@@ -30,7 +30,6 @@
 <script>
 	import { required, email } from 'vee-validate/dist/rules';
 	import { extend, ValidationObserver, ValidationProvider, setInteractionMode } from 'vee-validate';
-	import bcrypt from 'bcryptjs';
 	import axios from 'axios';
 	import router from '../../routes';
 
@@ -58,20 +57,19 @@
 
 		methods: {
 			submit () {
-				if (this.password) {
-					const email = this.email;
-					bcrypt.hash(this.password, 10).then(async function(hash) {
-						axios.post('http://localhost:3001/SignIn', {
-							email: email,
-							password: hash
-						}).then(function(response) {
-							localStorage.setItem('userToken', response.data.token);
-							router.replace('dashboard');
-						}).catch(function(error) {
-							console.log(error);
-						})
-					})
-				}
+				axios.post('http://localhost:3001/SignIn', {
+					email: this.email,
+					password: this.password
+				}).then(function(response) {
+					if (response.data.error == undefined) {
+						localStorage.setItem('userToken', response.data.token);
+						router.replace('dashboard');
+					} else {
+						console.log(response.data.error);
+					}
+				}).catch(function(error) {
+					console.log(error);
+				})
 			},
 		},
 	}
